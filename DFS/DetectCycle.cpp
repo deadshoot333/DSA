@@ -21,7 +21,7 @@ int main()
         int x,y;
         cin>>x>>y;
         g[x].push_back(y);
-        //g[y].push_back(x);
+        g[y].push_back(x);
     }
     if(DFS(r))
     {
@@ -41,13 +41,12 @@ bool DFS(int r)
 {
     visited[r]=1;
     cout<<r<<" ";
-    for(int child: g[r])
+    for(auto child: g[r])
     {
         if(visited[child]==0)
         {
             parent[child]=r;
             DFS(child);
-            return false;
         }
         else if(child!=parent[r]) //emon ekta visited child ache jeta claim kortese tar child r kintu actually r er parent set kora onn kichu tkhn cycle detected. amr child amr baap hote chai tkhn cycle detect hoi
         {
