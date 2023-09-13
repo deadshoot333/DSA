@@ -18,6 +18,8 @@ class Node
 
     }
 };
+vector<string>v;
+int x;
 class TRIE
 {
     public:
@@ -38,7 +40,7 @@ class TRIE
             u=u->children[k];
         }
         u->Eow+=1;
-        //cout<<u->Eow<<"\n";
+        cout<<u->Eow<<"\n";
     }
     bool isLeaf(Node *u)
     {
@@ -111,6 +113,7 @@ class TRIE
     {
         if(curr->Eow>0)
         {
+            v.push_back(s);
             cout<<s<<"\n";
         }
         for(int i=0;i<60;i++)
@@ -228,7 +231,11 @@ int main()
         }
         case 0:
         {
-            exit(0);
+            // for(string s:v)
+            // {
+            //     cout<<s<<"\n";
+            // }
+            break;
         }
         }
     }
