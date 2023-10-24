@@ -1,37 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
 int dp[100][100];
-void init()
+int arr[100];
+void init(int n)
 {
-    for(int i=0;i<100;i++)
-    {
-        for(int j=0;j<100;j++)
-        {
-            dp[i][j]=-1;
-        }
-    }
+	for(int i=0;i<=n;i++)
+	{
+		for(int j=0;j<=n;j++)
+		{
+			dp[i][j]=INT_MAX;
+		}
+	}
 }
-int mcm(int i,int j,int *array)
+int MCM(int i,int j)
 {
-    if(i==j)
-    {
-        return 0;
-    }
-    if(dp[i][j]=-1)
-    {
-        return dp[i][j];
-    }
-    dp[i][j]=INT_MAX;
-    for(int k=i;k<j;k++)
-    {
-        dp[i][j]=min(dp[i][j],mcm(i,k,array)+mcm(k+1,j,array)+array[i-1]*array[k]*array[j]);
-        cout<<dp[i][j]<<"\n";
-    }
-    return dp[i][j];
+	if(i==j)
+	{
+		return 0;
+	}
+	if(dp[i][j]!=INT_MAX)
+	{
+		return dp[i][j];
+	}
+	for(int k=i;k<j;k++)
+	{
+		dp[i][j]=min(dp[i][j],MCM(i,k)+MCM(k+1,j)+arr[i-1]*arr[k]*arr[j]);
+	}
+	return dp[i][j];
 }
 int main()
 {
-    init();
-    int array[]={1,2,3,4};
-    cout<<mcm(1,3,array)<<"\n";
+	int n;
+	cin>>n;
+	int row[n];
+	int col[n];
+	for(int i=0;i<n;i++)
+	{
+		cin>>row[i]>>col[i];
+		arr[i]=row[i];
+		arr[i+1]=col[i];	    //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
+	}
+	init(n);
+	cout<<MCM(1,n)<<"\n";
+	for(int i=1;i<=n;i++)
+	{
+		for(int j=1;j<=n;j++)
+		{
+			if(dp[i][j]==INT_MAX)
+			{
+				cout<<"0 ";
+			}
+			else
+			{
+				cout<<dp[i][j]<<" ";
+			}
+		}
+		cout<<"\n";
+	}
 }
