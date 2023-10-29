@@ -1,14 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 int dp[100][100];
+int s[100][100];
 int arr[100];
 void init(int n)
 {
 	for(int i=0;i<=n;i++)
 	{
-		for(int j=0;j<=n;j++)
+		for(int j=0;j<=n;j++)       
 		{
 			dp[i][j]=INT_MAX;
+			s[i][j]=INT_MAX;
 		}
 	}
 }
@@ -25,12 +27,28 @@ int MCM(int i,int j)
 	for(int k=i;k<j;k++)
 	{
 		dp[i][j]=min(dp[i][j],MCM(i,k)+MCM(k+1,j)+arr[i-1]*arr[k]*arr[j]);
+		s[i][j]=k;
 	}
 	return dp[i][j];
+}
+void printMCM(int i,int j)
+{
+	if(i==j)
+	{
+		cout<<"A"<<i;
+	}
+	else
+	{
+		cout<<"(";
+		printMCM(i,s[i][j]);
+		printMCM(s[i][j]+1,j);
+		cout<<")";
+	}
 }
 int main()
 {
 	int n;
+	cout<<"Enter the matrices dimensions = ";
 	cin>>n;
 	int row[n];
 	int col[n];
@@ -52,9 +70,10 @@ int main()
 			}
 			else
 			{
-				cout<<dp[i][j]<<" ";
+				cout<<s[i][j]<<" ";
 			}
 		}
 		cout<<"\n";
 	}
+	printMCM(1,n);
 }
