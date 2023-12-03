@@ -49,7 +49,7 @@ bool Solve(int col)
             board[i][col]=1;
             if(Solve(col+1))
             {
-                
+                //here if return true; is added then it shows only one solution
             }
             board[i][col]=0;
         }
